@@ -3,13 +3,28 @@
 
 // global var that has all three options
 const options = ['rock', 'paper', 'scissors'];
-const playerSelection = 'paper';
 
-function computerPlay() {
+// give the AI a random choice
+function computerChoice() {
     computerGuess = options[Math.floor(Math.random()*options.length)];
     return computerGuess;
-    console.log(computerGuess);
 }
+// give the player the opportunity to chose
+
+function playerChoice() {
+    /* do  {
+        let promptChoice = (prompt("Paper, Scissors or Rock?")).toLowerCase();
+    }
+    while (
+        promptChoice.indexOf(options[0]) !== -1|| 
+        promptChoice.indexOf(options[1]) !== -1|| 
+        promptChoice.indexOf(options[2]) !== -1
+    ); */
+    let promptChoice = (prompt("Paper, Scissors or Rock?")).toLowerCase();
+    console.log(promptChoice);
+    return promptChoice;
+}
+
 // single round of paper scissors rock
 function playRound(playerSelection, computerSelection) {
     console.log(playerSelection + " is what the player picked (playRound)");
@@ -29,23 +44,20 @@ function playRound(playerSelection, computerSelection) {
         let loseOutcome = "You lose! " + computerSelection + " beats " + playerSelection;
         return loseOutcome;
     }
-
 }
-// need to play 5 games and keep track of the game and score. init score trackers for computer/player
+
+// need to play 5 games and keep track of the game and score.
 function game(){
     let gameCount = 1;
     let playerScore = 0;
     let computerScore = 0;
 
-// loop through instances of games and update score
-// call the computerSelection var every time, so we have a new AI choice per instance
-// test for the string 'You win!' and store the result in 'result'... it will only run once, right?
+// loop through instances of games and update score on each run
     for (let i = 1; i < 6; ++i){
-        console.log("Round: " + i);
-        let computerSelection = computerPlay();
-        
+        let playerSelection = playerChoice();
+        let computerSelection = computerChoice();
         let result = playRound(playerSelection, computerSelection);
-        //use a quarternary operator?
+        
         if (/You win!/gi.test(result)) {
             playerScore++;
             gameCount++;
@@ -65,12 +77,4 @@ function game(){
         }
     }
 }
-
 game();
-/* some code that I'll eventually use to check the string is in the right format
-let playerSelection = (prompt("Paper, Scissors or Rock?"));
-    if (typeof playerSelection != "string") {
-        alert("You have to enter either Paper, Scissors or Rock!");
-    }
-    else {
-        playerSelection = playerSelection.toLowerCase();*/ 
