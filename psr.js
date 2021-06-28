@@ -81,19 +81,3 @@ function game(){
     }
 }
 game();
-
-/*if (result === "win") {
-            playerScore++;
-            gameCount++;
-            console.log("After round report: \n\n Player score: " + playerScore + " Computer Score: " + computerScore);
-        }
-        else if (result == "loss"){
-            computerScore++;
-            gameCount++;
-            console.log("After round report: \n\n Player score: " + playerScore + " Computer Score: " + computerScore);
-        }
-        else {
-            gameCount++;
-            console.log("After round report: \n\n Player score: " + playerScore + " Computer Score: " + computerScore);
-        }
-        */
