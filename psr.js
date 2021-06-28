@@ -9,15 +9,11 @@ function computerChoice() {
 // give the player the opportunity to chose
 
 function playerChoice() {
-    /* do  {
-        let promptChoice = (prompt("Paper, Scissors or Rock?")).toLowerCase();
+    let promptChoice;
+    do { 
+        promptChoice = prompt("Paper, Scissors or Rock?").toLowerCase();
     }
-    while (
-        promptChoice.indexOf(options[0]) !== -1|| 
-        promptChoice.indexOf(options[1]) !== -1|| 
-        promptChoice.indexOf(options[2]) !== -1
-    ); */
-    let promptChoice = (prompt("Paper, Scissors or Rock?")).toLowerCase();
+    while (!options.includes(promptChoice)); 
     return promptChoice;
 }
 
@@ -29,19 +25,19 @@ function playRound(playerSelection, computerSelection) {
     if (playerSelection == computerSelection) {
         let drawOutcome = "This round is a draw! ";
         console.log(drawOutcome);
-        return 0;
+        return "draw";
     }
     else if ((playerSelection == 'rock' && computerSelection == 'scissors') || 
     (playerSelection == 'paper' && computerSelection == 'rock') ||
     (playerSelection == 'scissors' && computerSelection ==='paper')){
         let winOutcome = "You win this round! " + playerSelection + " beats " + computerSelection;
         console.log(winOutcome);
-        return 1;
+        return "win";
     }
     else {
         let loseOutcome = "You lose this round! " + computerSelection + " beats " + playerSelection;
         console.log(loseOutcome);
-        return 2;
+        return "lose";
     }
 }
 
@@ -57,13 +53,41 @@ function game(){
         let computerSelection = computerChoice();
         console.log("Round " + i);
         let result = playRound(playerSelection, computerSelection);
-        
-        if (result == 1) {
+        switch (result){
+            case "win":
+                playerScore++;
+                gameCount++;
+                console.log("After round report: \n\n Player score: " + playerScore + " Computer Score: " + computerScore);
+                break;
+            case "lose":
+                computerScore++;
+                gameCount++;
+                console.log("After round report: \n\n Player score: " + playerScore + " Computer Score: " + computerScore);
+                break;
+            case "draw":
+                gameCount++;
+                console.log("After round report: \n\n Player score: " + playerScore + " Computer Score: " + computerScore);
+                break;
+            default:
+                console.log("wtf how did you even get to this case???");
+                break;
+        }
+    }
+    if (playerScore > computerScore){
+        console.log("You won the whole game! ");
+    }   
+    else {
+        console.log("You lost! Suck eggs... ");
+    }
+}
+game();
+
+/*if (result === "win") {
             playerScore++;
             gameCount++;
             console.log("After round report: \n\n Player score: " + playerScore + " Computer Score: " + computerScore);
         }
-        else if (result == 2){
+        else if (result == "loss"){
             computerScore++;
             gameCount++;
             console.log("After round report: \n\n Player score: " + playerScore + " Computer Score: " + computerScore);
@@ -72,12 +96,4 @@ function game(){
             gameCount++;
             console.log("After round report: \n\n Player score: " + playerScore + " Computer Score: " + computerScore);
         }
-    }
-    if (playerScore > computerScore){
-        console.log("You won the whole game! ");
-    }
-    else {
-        console.log("You lost! Suck eggs... ");
-    }
-}
-game();
+        */
