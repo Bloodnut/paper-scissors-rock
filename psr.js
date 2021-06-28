@@ -1,6 +1,3 @@
-
-// need a func that gives the computer a random guess per game
-
 // global var that has all three options
 const options = ['rock', 'paper', 'scissors'];
 
@@ -21,28 +18,30 @@ function playerChoice() {
         promptChoice.indexOf(options[2]) !== -1
     ); */
     let promptChoice = (prompt("Paper, Scissors or Rock?")).toLowerCase();
-    console.log(promptChoice);
     return promptChoice;
 }
 
 // single round of paper scissors rock
 function playRound(playerSelection, computerSelection) {
-    console.log(playerSelection + " is what the player picked (playRound)");
-    console.log(computerSelection +  " is what the computer randomed (playRound)");
+    console.log("Player choice: " + playerSelection);
+    console.log("Computer choice: " + computerSelection);
 
     if (playerSelection == computerSelection) {
-        let drawOutcome = "It's a draw ";
-        return drawOutcome;
+        let drawOutcome = "This round is a draw! ";
+        console.log(drawOutcome);
+        return 0;
     }
     else if ((playerSelection == 'rock' && computerSelection == 'scissors') || 
     (playerSelection == 'paper' && computerSelection == 'rock') ||
     (playerSelection == 'scissors' && computerSelection ==='paper')){
-        let winOutcome = "You win! " + playerSelection + " beats " + computerSelection;
-        return winOutcome;
+        let winOutcome = "You win this round! " + playerSelection + " beats " + computerSelection;
+        console.log(winOutcome);
+        return 1;
     }
     else {
-        let loseOutcome = "You lose! " + computerSelection + " beats " + playerSelection;
-        return loseOutcome;
+        let loseOutcome = "You lose this round! " + computerSelection + " beats " + playerSelection;
+        console.log(loseOutcome);
+        return 2;
     }
 }
 
@@ -56,25 +55,29 @@ function game(){
     for (let i = 1; i < 6; ++i){
         let playerSelection = playerChoice();
         let computerSelection = computerChoice();
+        console.log("Round " + i);
         let result = playRound(playerSelection, computerSelection);
         
-        if (/You win!/gi.test(result)) {
+        if (result == 1) {
             playerScore++;
             gameCount++;
-            console.log("You won (game)");
-            console.log("After game report: \n\n Player score: " + playerScore + " Computer Score: " + computerScore);
+            console.log("After round report: \n\n Player score: " + playerScore + " Computer Score: " + computerScore);
         }
-        else if (/You lose!/gi.test(result)){
+        else if (result == 2){
             computerScore++;
             gameCount++;
-            console.log("You lost (game)");
-            console.log("After game report: \n\n Player score: " + playerScore + " Computer Score: " + computerScore);
+            console.log("After round report: \n\n Player score: " + playerScore + " Computer Score: " + computerScore);
         }
         else {
             gameCount++;
-            console.log("You drew(game)");
-            console.log("After game report: \n\n Player score: " + playerScore + " Computer Score: " + computerScore);
+            console.log("After round report: \n\n Player score: " + playerScore + " Computer Score: " + computerScore);
         }
+    }
+    if (playerScore > computerScore){
+        console.log("You won the whole game! ");
+    }
+    else {
+        console.log("You lost! Suck eggs... ");
     }
 }
 game();
